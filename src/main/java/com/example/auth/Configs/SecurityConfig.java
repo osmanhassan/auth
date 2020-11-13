@@ -25,6 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     AuthUserDetailsService authUserDetailsService;
+    @Autowired
+    AuthBeans authBeans;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -61,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/users/list").permitAll()
+                .antMatchers(authBeans.permitAll()).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

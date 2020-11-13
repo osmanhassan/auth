@@ -1,5 +1,7 @@
 package com.example.auth.Entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -58,6 +60,7 @@ public class AuthoritiesEntity {
         return Objects.hash(id, userName, role);
     }
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "USER_NAME", referencedColumnName = "USER_NAME", nullable = false)
     public UsersEntity getUsersByUserName() {
@@ -67,7 +70,7 @@ public class AuthoritiesEntity {
     public void setUsersByUserName(UsersEntity usersByUserName) {
         this.usersByUserName = usersByUserName;
     }
-
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "ROLE", referencedColumnName = "ROLE", nullable = false)
     public RolesEntity getRolesByRole() {

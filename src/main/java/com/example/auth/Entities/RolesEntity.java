@@ -1,5 +1,7 @@
 package com.example.auth.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -35,7 +37,8 @@ public class RolesEntity {
         return Objects.hash(role);
     }
 
-    @OneToMany(mappedBy = "rolesByRole")
+    @JsonBackReference
+    @OneToMany(mappedBy = "rolesByRole", fetch = FetchType.EAGER)
     public Collection<AclEntity> getAclsByRole() {
         return aclsByRole;
     }
@@ -44,6 +47,7 @@ public class RolesEntity {
         this.aclsByRole = aclsByRole;
     }
 
+    @JsonBackReference
     @OneToMany(mappedBy = "rolesByRole")
     public Collection<AuthoritiesEntity> getAuthoritiesByRole() {
         return authoritiesByRole;

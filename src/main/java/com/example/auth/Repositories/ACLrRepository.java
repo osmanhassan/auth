@@ -5,9 +5,9 @@ import java.util.Map;
 
 public interface ACLrRepository {
 
-    void save(String id, String token);
-    Map<String,String> findAll();
-    String findById(String id);
-    List<String> findAllByKeys(List<String> keys);
-    void delete(String id);
+    void save(String entityName,String id, String token);
+    Map<String,String> findAll(String entityName);
+    String findById(String entityName, String id);
+    List<String> findAllByKeys(String entityName, List<String> keys);
+    void delete(String entityName, String id);
 }

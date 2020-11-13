@@ -1,5 +1,7 @@
 package com.example.auth.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -81,6 +83,7 @@ public class UsersEntity {
         return Objects.hash(userName, password, email, phone);
     }
 
+    @JsonBackReference
     @OneToMany(mappedBy = "usersByUserName", fetch = FetchType.EAGER)
     public Collection<AuthoritiesEntity> getAuthoritiesByUserName() {
         return authoritiesByUserName;

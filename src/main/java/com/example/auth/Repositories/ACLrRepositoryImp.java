@@ -18,28 +18,28 @@ public class ACLrRepositoryImp implements ACLrRepository {
     }
 
     @Override
-    public void save(String id, String token) {
-        hashOperations.put("ACL", id, token);
+    public void save(String entityName, String id, String token) {
+        hashOperations.put(entityName, id, token);
     }
 
     @Override
-    public Map<String, String> findAll() {
-        return hashOperations.entries("ACL");
+    public Map<String, String> findAll(String entityName) {
+        return hashOperations.entries(entityName);
     }
 
     @Override
-    public String findById(String id) {
-        String token = hashOperations.get("ACL", id) == null ? null : hashOperations.get("ACL", id).toString();
+    public String findById(String entityName, String id) {
+        String token = hashOperations.get(entityName, id) == null ? null : hashOperations.get(entityName, id).toString();
         return token;
     }
 
     @Override
-    public List<String> findAllByKeys(List<String> keys) {
-        return hashOperations.multiGet("ACL", keys);
+    public List<String> findAllByKeys(String entityName, List<String> keys) {
+        return hashOperations.multiGet(entityName, keys);
     }
 
     @Override
-    public void delete(String id) {
-        hashOperations.delete("ACL", id);
+    public void delete(String entityName,String id) {
+        hashOperations.delete(entityName, id);
     }
 }

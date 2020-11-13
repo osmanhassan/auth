@@ -1,5 +1,8 @@
 package com.example.auth.Entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.annotation.Generated;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,9 +13,11 @@ public class AclEntity implements Serializable {
     private Integer id;
     private String role;
     private String url;
+    private Integer isPattern;
     private RolesEntity rolesByRole;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public Integer getId() {
         return id;
@@ -42,6 +47,16 @@ public class AclEntity implements Serializable {
         this.url = url;
     }
 
+    @Basic
+    @Column(name = "IS_PATTERN")
+    public Integer getIsPattern(){
+        return isPattern;
+    }
+
+    public void setIsPattern(Integer isPattern) {
+        this.isPattern = isPattern;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,15 +64,17 @@ public class AclEntity implements Serializable {
         AclEntity aclEntity = (AclEntity) o;
         return Objects.equals(id, aclEntity.id) &&
                 Objects.equals(role, aclEntity.role) &&
-                Objects.equals(url, aclEntity.url);
+                Objects.equals(url, aclEntity.url) &&
+                Objects.equals(isPattern, aclEntity.isPattern);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, role, url);
+        return Objects.hash(id, role, url, isPattern);
     }
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "ROLE", referencedColumnName = "ROLE", nullable = false)
     public RolesEntity getRolesByRole() {
