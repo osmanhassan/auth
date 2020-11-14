@@ -21,6 +21,13 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @RequestMapping(value = "/list/osman")
+    @ResponseBody
+    public Object list(){
+        return "osman";
+    }
+
+
     @RequestMapping(value = "/test")
     @ResponseBody
     public Object test(){
